@@ -1,119 +1,65 @@
-# Full-Stack Coding Challenge
+# Task Management Project
 
-**Deadline**: Sunday, Feb 23th 11:59 pm PST
+## Prerequisites
 
----
+- Node.js (https://nodejs.org/)
+- PostgreSQL (https://www.postgresql.org/download/)
 
-## Overview
+## Setup Instructions
 
-Create a “Task Management” application with **React + TypeScript** (frontend), **Node.js** (or **Nest.js**) (backend), and **PostgreSQL** (database). The application should:
+### Database: PostgreSQL
 
-1. **Register** (sign up) and **Log in** (sign in) users.
-2. After logging in, allow users to:
-   - **View a list of tasks**.
-   - **Create a new task**.
-   - **Update an existing task** (e.g., mark complete, edit).
-   - **Delete a task**.
+The tables will be created automatically when the server is run.
 
-Focus on **correctness**, **functionality**, and **code clarity** rather than visual design.  
-This challenge is intended to be completed within ~3 hours, so keep solutions minimal yet functional.
+### Backend (Server)
 
----
+1. **Clone the repository:**
+   git clone https://github.com/MiguelVazB/lumaa-spring-2025-swe.git
+   cd TaskManagement/server
 
-## Requirements
+2. **Install dependencies:**
+   npm install
 
-### 1. Authentication
+3. **Create a .env file in the server directory**
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_USER=postgres
+   DB_PASSWORD=postgres
+   DB_NAME=postgres
+   JWT_SECRET_KEY = b76e98d8b73c7b7a5f24c60c2b9e8316980ea02feb25b280ae65dbda7abef698934a6147d47126dc43f09b1562bbac6a2d55eccc163de8bb776c72072db67974
 
-- **User Model**:
-  - `id`: Primary key
-  - `username`: Unique string
-  - `password`: Hashed string
-- **Endpoints**:
-  - `POST /auth/register` – Create a new user
-  - `POST /auth/login` – Login user, return a token (e.g., JWT)
-- **Secure the Tasks Routes**: Only authenticated users can perform task operations.  
-  - **Password Hashing**: Use `bcrypt` or another hashing library to store passwords securely.
-  - **Token Verification**: Verify the token (JWT) on each request to protected routes.
+4. **Start the PostgreSQL server and create the database:**
+   psql -U postgres -c "CREATE DATABASE postgres;"
+   You can also start it using pgAdmin4 if you encounter any issues
 
-### 2. Backend (Node.js or Nest.js)
+5. **Run the server:**
+   npm run dev
 
-- **Tasks CRUD**:  
-  - `GET /tasks` – Retrieve a list of tasks (optionally filtered by user).  
-  - `POST /tasks` – Create a new task.  
-  - `PUT /tasks/:id` – Update a task (e.g., mark as complete, edit text).  
-  - `DELETE /tasks/:id` – Delete a task.
-- **Task Model**:
-  - `id`: Primary key
-  - `title`: string
-  - `description`: string (optional)
-  - `isComplete`: boolean (default `false`)
-  - _(Optional)_ `userId` to link tasks to the user who created them
-- **Database**: PostgreSQL
-  - Provide instructions/migrations to set up:
-    - `users` table (with hashed passwords)
-    - `tasks` table
-- **Setup**:
-  - `npm install` to install dependencies
-  - `npm run start` (or `npm run dev`) to run the server
-  - Document any environment variables (e.g., database connection string, JWT secret)
+If the setup was successful, You should see the following messages on the terminal:
+App listening on port 3000!
+Connected to the PostgreSQL database
+Tasks table created successfully
+User table created successfully
 
-### 3. Frontend (React + TypeScript)
+### Frontend (Client)
 
-- **Login / Register**:
-  - Simple forms for **Register** and **Login**.
-  - Store JWT (e.g., in `localStorage`) upon successful login.
-  - If not authenticated, the user should not see the tasks page.
-- **Tasks Page**:
-  - Fetch tasks from `GET /tasks` (including auth token in headers).
-  - Display the list of tasks.
-  - Form to create a new task (`POST /tasks`).
-  - Buttons/fields to update a task (`PUT /tasks/:id`).
-  - Button to delete a task (`DELETE /tasks/:id`).
-- **Navigation**:
-  - Show `Login`/`Register` if not authenticated.
-  - Show `Logout` if authenticated.
-- **Setup**:
-  - `npm install` then `npm start` (or `npm run dev`) to run.
-  - Document how to point the frontend at the backend (e.g., `.env` file, base URL).
+1. **Navigate to the client directory:**
+   cd ../client
 
----
+2. **Install dependencies:**
+   npm install
 
-## Deliverables
+3. **Create a .env file in the client directory**
+   VITE_API_URL="http://localhost:3000"
 
-1. **Fork the Public Repository**: **Fork** this repo into your own GitHub account.
-2. **Implement Your Solution** in the forked repository. Make sure you're README file has:
-   - Steps to set up the database (migrations, environment variables).
-   - How to run the backend.
-   - How to run the frontend.
-   - Any relevant notes on testing.
-   - Salary Expectations per month (Mandatory)
-3. **Short Video Demo**: Provide a link (in a `.md` file in your forked repo) to a brief screen recording showing:
-   - Registering a user
-   - Logging in
-   - Creating, updating, and deleting tasks
-4. **Deadline**: Submissions are due **Sunday, Feb 23th 11:59 pm PST**.
+4. **Run the client:**
+   npm run dev
 
-> **Note**: Please keep your solution minimal. The entire project is intended to be completed in around 3 hours. Focus on core features (registration, login, tasks CRUD) rather than polished UI or extra features.
+## Access the Application
 
----
+The backend server runs on http://localhost:3000/
+The frontend client runs on http://localhost:5173/
 
-## Evaluation Criteria
-
-1. **Functionality**  
-   - Does registration and login work correctly (with password hashing)?
-   - Are tasks protected by authentication?
-   - Does the tasks CRUD flow work end-to-end?
-
-2. **Code Quality**  
-   - Is the code structured logically and typed in TypeScript?
-   - Are variable/function names descriptive?
-
-3. **Clarity**  
-   - Is the `README.md` (in your fork) clear and detailed about setup steps?
-   - Easy to run and test?
-
-4. **Maintainability**  
-   - Organized logic (controllers/services, etc.)
-   - Minimal hard-coded values
-
-Good luck, and we look forward to your submission!
+Salary Expectations per month:
+Assuming 20 hrs per week as posted in the job board.
+I expect $25/hr which would convert to $2000/month
